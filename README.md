@@ -1,56 +1,61 @@
-# BottiMazeMap (BMM)
+# Botti-Maze Notation (BMN)
+ 
+**Botti-Maze Notation (BMN)** is an innovative notation designed to represent quadrilateral mazes in a compact and efficient manner. This notation transforms the complex structure of a maze into a concise alphanumeric code, making it easier to store, transmit, and manipulate in various computational contexts.
 
-**BottiMazeMap (BMM)** é uma notação inovadora projetada para representar labirintos quadriláteros de forma compacta e eficiente. Esta notação transforma a estrutura complexa de um labirinto em um código alfanumérico conciso, facilitando seu armazenamento, transmissão e manipulação em diversos contextos computacionais.
+Inspired by the elegance and efficiency of the Forsyth-Edwards Notation (FEN) used in chess, BMN applies similar principles of compression and standardization to mazes. Just as FEN captures the complete state of a chessboard in a single string of text, BMN encodes the entire structure of a maze—including its dimensions, paths, and walls—into a unique textual representation.
 
-Inspirada pela elegância e eficácia da notação FEN (Forsyth-Edwards Notation) utilizada no xadrez, a BMM aplica princípios similares de compactação e padronização para labirintos. Assim como a FEN captura o estado completo de um tabuleiro de xadrez em uma única string de texto, a BMM codifica toda a estrutura de um labirinto - incluindo suas dimensões, caminhos e paredes - em uma representação textual única.
+To provide context, FEN notation in chess is a standard method for describing the complete position of a chess game in a single line of text. For example, the initial position of a chess game in FEN is represented as:
 
-Para contextualizar, a notação FEN no xadrez é um método padrão para descrever a posição completa de um jogo de xadrez em uma única linha de texto. Por exemplo, a posição inicial de um jogo de xadrez em FEN é representada como:
 
 ```
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-```
-
-Nesta notação, cada letra representa uma peça (r = torre, n = cavalo, b = bispo, q = rainha, k = rei, p = peão), os números representam espaços vazios, e as barras (/) separam as linhas do tabuleiro. Informações adicionais após o espaço incluem quem move, direitos de roque, possibilidade de en passant, e contagem de movimentos.
-
-De maneira análoga, a BMM codifica a estrutura completa de um labirinto em uma string compacta. Por exemplo:
 
 ```
+In this notation, each letter represents a piece (r = rook, n = knight, b = bishop, q = queen, k = king, p = pawn), numbers represent empty squares, and slashes (/) separate the rows of the board. Additional information after the space includes the side to move, castling rights, en passant availability, and move count.
+
+Similarly, BMN encodes the complete structure of a maze into a compact string. For example:
+```
+
 12x11:Dv9Ab6wV+rFeqNXaC39kD78=
-```
-
-Nesta notação BMM, "12x11" representa as dimensões do labirinto, enquanto a string após os dois pontos (:) é uma representação codificada e comprimida da estrutura interna do labirinto, incluindo todos os caminhos e paredes.
-
-Assim como a FEN revolucionou a maneira como posições de xadrez são registradas e compartilhadas, a BMM visa simplificar e padronizar a representação de labirintos, tornando-os mais acessíveis para uma variedade de aplicações, desde jogos até algoritmos de pathfinding e estudos de inteligência artificial.
-
-## Propósito e Aplicações
-
-O BottiMazeMap (BMM) foi desenvolvido com os seguintes objetivos em mente:
-
-1. **Criação Procedural de Labirintos**: A notação BMM facilita a geração e armazenamento de labirintos para jogos e aplicações que requerem a criação dinâmica de ambientes labirínticos.
-
-2. **Estudo de Algoritmos de Pathfinding**: BMM proporciona uma representação compacta de labirintos, ideal para testar e estudar algoritmos de busca de caminhos, como o A* (A-star) e similares.
-
-3. **Otimização de Processamento**: Ao compactar a representação do labirinto, o BMM contribui para um aumento significativo na velocidade de processamento em aplicações que manipulam ou analisam estruturas de labirinto.
-
-## Exemplo de Notação
-
-Considere a seguinte notação BMM:
 
 ```
+In this BMN notation, "12x11" represents the maze's dimensions, while the string after the colon (:) is an encoded and compressed representation of the maze's internal structure, including all paths and walls.
+
+Just as FEN revolutionized the way chess positions are recorded and shared, BMN aims to simplify and standardize the representation of mazes, making them more accessible for a variety of applications, from games to pathfinding algorithms and artificial intelligence studies.
+
+## Purpose and Applications
+
+Botti-Maze Notation (BMN) was developed with the following goals in mind:
+
+1.  **Procedural Maze Creation**: BMN notation facilitates the generation and storage of mazes for games and applications that require dynamic creation of labyrinthine environments.
+
+2.  **Study of Pathfinding Algorithms**: BMN provides a compact representation of mazes, ideal for testing and studying pathfinding algorithms like A* (A-star) and similar ones.
+
+3.  **Processing Optimization**: By compacting the maze's representation, BMN contributes to a significant increase in processing speed in applications that manipulate or analyze maze structures.
+
+## Notation Example
+
+Consider the following BMN notation:
+
+```
+
 12x11:Dv9Ab6wV+rFeqNXaC39kD78=
+
 ```
 
-- **12x11**: Representa as dimensões do labirinto (largura x altura).
-- **Dv9Ab6wV+rFeqNXaC39kD78=**: Este é o perfil compactado do labirinto.
+-  **12x11**: Represents the dimensions of the maze (width x height).
 
-## Descrição do Labirinto
+-  **Dv9Ab6wV+rFeqNXaC39kD78=**: This is the compressed profile of the maze.
 
-O labirinto é reduzido a uma matriz binária, onde cada célula é representada por um dígito:
+## Maze Description
 
-- **1**: Célula preenchida (parede).
-- **0**: Célula vazia (caminho).
+The maze is reduced to a binary matrix, where each cell is represented by a digit:
 
-A matriz correspondente ao exemplo acima seria:
+-  **1**: Filled cell (wall).
+
+-  **0**: Empty cell (path).
+
+The matrix corresponding to the above example would be:
 
 ```
 11101111111
@@ -66,33 +71,32 @@ A matriz correspondente ao exemplo acima seria:
 10010000001
 11110111111
 ```
+This binary pattern is then compacted into BMN notation for a shorter and more efficient representation.
 
-Este padrão binário é então compactado na notação BMM para uma representação mais curta e eficiente.
+## Construction of Botti-Maze Notation (BMN)
 
-## Construção do BottiMazeMap (BMM)
+The construction of Botti-Maze Notation (BMN) follows specific steps to transform a matrix representing a maze into a compact and easily reproducible notation:
 
-A construção do BottiMazeMap (BMM) segue alguns passos específicos para transformar uma matriz que representa um labirinto em uma notação compacta e facilmente reproduzível:
+1.  **Maze Reading**: The maze matrix is read, where each row represents a line of the matrix, and each character (0 or 1) represents a cell (path or wall).
 
-1. **Leitura do Labirinto**: A matriz do labirinto é lida, onde cada linha representa uma linha da matriz e cada caractere (0 ou 1) representa uma célula (caminho ou parede).
+2.  **Conversion of the Matrix into a Continuous Binary String**: The matrix is converted into a single long binary string.
 
-2. **Conversão da Matriz em uma String Binária Contínua**: A matriz é convertida em uma única string binária longa.
+3.  **Conversion of the Binary String into Bytes**: The binary string is converted into bytes for compression.
 
-3. **Conversão da String Binária em Bytes**: A string binária é convertida em bytes para compactação.
+4.  **Base64 Encoding**: The bytes are encoded in Base64 for a more compact and transmittable representation.
 
-4. **Codificação Base64**: Os bytes são codificados em Base64 para uma representação mais compacta e transmissível.
+5.  **Generation of the Final Notation**: The BMN notation is constructed by combining the maze dimensions with the Base64-encoded string.
 
-5. **Geração da Notação Final**: A notação BMM é construída combinando as dimensões do labirinto com a string codificada em Base64.
+## Advantages of BMN
 
-## Vantagens do BMM
+1.  **Efficient Compression**: Significantly reduces the space required to store maze representations.
 
-1. **Compactação Eficiente**: Reduz significativamente o espaço necessário para armazenar representações de labirintos.
+2.  **Ease of Transmission**: The compact notation facilitates the transmission of maze structures over networks or between different parts of a system.
 
-2. **Facilidade de Transmissão**: A notação compacta facilita a transmissão de estruturas de labirinto em redes ou entre diferentes partes de um sistema.
+3.  **Performance Enhancement**: The compact representation allows for faster processing in pathfinding algorithms and maze analysis.
 
-3. **Aumento de Desempenho**: A representação compacta permite um processamento mais rápido em algoritmos de pathfinding e análise de labirintos.
+4.  **Versatility**: Can be easily integrated into various types of applications, from games to simulation systems and AI.
 
-4. **Versatilidade**: Pode ser facilmente integrado em diversos tipos de aplicações, desde jogos até sistemas de simulação e IA.
+## Conclusion  
 
-## Conclusão
-
-O BottiMazeMap (BMM) oferece uma solução eficiente para representar labirintos de forma compacta, facilitando sua manipulação em diversos contextos computacionais. Sua aplicação em criação procedural de labirintos e no estudo de algoritmos de pathfinding demonstra sua versatilidade e utilidade prática.
+Botti-Maze Notation (BMN) offers an efficient solution for representing mazes compactly, making them easier to manipulate in various computational contexts. Its application in procedural maze creation and the study of pathfinding algorithms demonstrates its versatility and practical utility.
