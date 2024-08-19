@@ -9,15 +9,12 @@ To provide context, FEN notation in chess is a standard method for describing th
 
 ```
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-
 ```
 In this notation, each letter represents a piece (r = rook, n = knight, b = bishop, q = queen, k = king, p = pawn), numbers represent empty squares, and slashes (/) separate the rows of the board. Additional information after the space includes the side to move, castling rights, en passant availability, and move count.
 
 Similarly, BMN encodes the complete structure of a maze into a compact string. For example:
 ```
-
 12x11:Dv9Ab6wV+rFeqNXaC39kD78=
-
 ```
 In this BMN notation, "12x11" represents the maze's dimensions, while the string after the colon (:) is an encoded and compressed representation of the maze's internal structure, including all paths and walls.
 
@@ -38,9 +35,7 @@ Botti-Maze Notation (BMN) was developed with the following goals in mind:
 Consider the following BMN notation:
 
 ```
-
 12x11:Dv9Ab6wV+rFeqNXaC39kD78=
-
 ```
 
 -  **12x11**: Represents the dimensions of the maze (width x height).
