@@ -13,6 +13,9 @@ rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
 In this notation, each letter represents a piece (r = rook, n = knight, b = bishop, q = queen, k = king, p = pawn), numbers represent empty squares, and slashes (/) separate the rows of the board. Additional information after the space includes the side to move, castling rights, en passant availability, and move count.
 
 Similarly, BMN encodes the complete structure of a maze into a compact string. For example:
+
+<img src="https://github.com/ferbotti/mazemap/blob/main/maze1.png?raw=true" alt="Exemplo de Imagem" width="100" height="100"/>
+
 ```
 12x11:Dv9Ab6wV+rFeqNXaC39kD78=
 ```
@@ -44,6 +47,8 @@ Consider the following BMN notation:
 
 ## Maze Description
 
+<img src="https://github.com/ferbotti/mazemap/blob/main/maze1matrix.png?raw=true" alt="Exemplo de Imagem" width="150" height="150"/>
+
 The maze is reduced to a binary matrix, where each cell is represented by a digit:
 
 -  **1**: Filled cell (wall).
@@ -51,6 +56,8 @@ The maze is reduced to a binary matrix, where each cell is represented by a digi
 -  **0**: Empty cell (path).
 
 The matrix corresponding to the above example would be:
+
+<img src="https://github.com/ferbotti/mazemap/blob/main/binMatrix.png?raw=true" alt="Exemplo de Imagem" width="200" height="200"/>
 
 ```
 11101111111
@@ -66,6 +73,8 @@ The matrix corresponding to the above example would be:
 10010000001
 11110111111
 ```
+
+
 This binary pattern is then compacted into BMN notation for a shorter and more efficient representation.
 
 ## Construction of Botti-Maze Notation (BMN)
