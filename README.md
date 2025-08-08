@@ -106,3 +106,13 @@ The construction of Botti-Maze Notation (BMN) follows specific steps to transfor
 ## Conclusion  
 
 Botti-Maze Notation (BMN) offers an efficient solution for representing mazes compactly, making them easier to manipulate in various computational contexts. Its application in procedural maze creation and the study of pathfinding algorithms demonstrates its versatility and practical utility.
+
+## Running the Encode/Decode Demo
+
+To encode and decode the sample maze, run:
+
+```bash
+python examples/encode_decode_demo.py
+```
+
+This script loads `mazefile/mazeBin1.mz`, prints its BMN representation, and reconstructs the original matrix.
