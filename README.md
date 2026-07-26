@@ -1,67 +1,20 @@
 # Botti-Maze Notation (BMN)
 
-**"Labyrinth is a cryptography of space" - Botti, F.**
- 
-**Botti-Maze Notation (BMN)** is an innovative notation designed to represent quadrilateral mazes in a compact and efficient manner. This notation transforms the complex structure of a maze into a concise alphanumeric code, making it easier to store, transmit, and manipulate in various computational contexts.
+**Botti-Maze Notation (BMN)** is a compact text notation for rectangular binary mazes.
 
-Inspired by the elegance and efficiency of the Forsyth-Edwards Notation (FEN) used in chess, BMN applies similar principles of compression and standardization to mazes. Just as FEN captures the complete state of a chessboard in a single string of text, BMN encodes the entire structure of a maze—including its dimensions, paths, and walls—into a unique textual representation.
+BMN stores a maze as:
 
-To provide context, FEN notation in chess is a standard method for describing the complete position of a chess game in a single line of text. For example, the initial position of a chess game in FEN is represented as:
-
-
-```
-rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-```
-In this notation, each letter represents a piece (r = rook, n = knight, b = bishop, q = queen, k = king, p = pawn), numbers represent empty squares, and slashes (/) separate the rows of the board. Additional information after the space includes the side to move, castling rights, en passant availability, and move count.
-
-Similarly, BMN encodes the complete structure of a maze into a compact string. For example:
-
-<img src="https://github.com/ferbotti/mazemap/blob/main/maze1.png?raw=true" alt="Exemplo de Imagem" width="100" height="100"/>
-
-```
-12x11:Dv9Ab6wV+rFeqNXaC39kD78=
-```
-In this BMN notation, "12x11" represents the maze's dimensions, while the string after the colon (:) is an encoded and compressed representation of the maze's internal structure, including all paths and walls.
-
-Just as FEN revolutionized the way chess positions are recorded and shared, BMN aims to simplify and standardize the representation of mazes, making them more accessible for a variety of applications, from games to pathfinding algorithms and artificial intelligence studies.
-
-## Purpose and Applications
-
-Botti-Maze Notation (BMN) was developed with the following goals in mind:
-
-1.  **Procedural Maze Creation**: BMN notation facilitates the generation and storage of mazes for games and applications that require dynamic creation of labyrinthine environments.
-
-2.  **Study of Pathfinding Algorithms**: BMN provides a compact representation of mazes, ideal for testing and studying pathfinding algorithms like A* (A-star) and similar ones.
-
-3.  **Processing Optimization**: By compacting the maze's representation, BMN contributes to a significant increase in processing speed in applications that manipulate or analyze maze structures.
-
-## Notation Example
-
-Consider the following BMN notation:
-
-```
-12x11:Dv9Ab6wV+rFeqNXaC39kD78=
+```text
+<width>x<height>:<base64-payload>[;metadata=value]
 ```
 
--  **12x11**: Represents the dimensions of the maze (width x height).
+In the binary matrix, `1` represents a wall and `0` represents an open path.
 
--  **Dv9Ab6wV+rFeqNXaC39kD78=**: This is the compressed profile of the maze.
+## Example
 
-## Maze Description
+The sample maze in `mazefile/mazeBin1.mz` has 11 columns and 12 rows:
 
-<img src="https://github.com/ferbotti/mazemap/blob/main/maze1matrix.png?raw=true" alt="Exemplo de Imagem" width="150" height="150"/>
-
-The maze is reduced to a binary matrix, where each cell is represented by a digit:
-
--  **1**: Filled cell (wall).
-
--  **0**: Empty cell (path).
-
-The matrix corresponding to the above example would be:
-
-<img src="https://github.com/ferbotti/mazemap/blob/main/binMatrix.png?raw=true" alt="Exemplo de Imagem" width="200" height="200"/>
-
-```
+```text
 11101111111
 10100000001
 10111110101
@@ -76,43 +29,101 @@ The matrix corresponding to the above example would be:
 11110111111
 ```
 
+The current implementation encodes it as:
 
-This binary pattern is then compacted into BMN notation for a shorter and more efficient representation.
+```text
+11x12:7/QG+sFfqxXqjV2gt/ZA+/A=
+```
 
-## Construction of Botti-Maze Notation (BMN)
+Metadata can be appended without breaking the original format:
 
-The construction of Botti-Maze Notation (BMN) follows specific steps to transform a matrix representing a maze into a compact and easily reproducible notation:
+```text
+11x12:7/QG+sFfqxXqjV2gt/ZA+/A=;entrance=3,0;exit=3,11
+```
 
-1.  **Maze Reading**: The maze matrix is read, where each row represents a line of the matrix, and each character (0 or 1) represents a cell (path or wall).
+## Install
 
-2.  **Conversion of the Matrix into a Continuous Binary String**: The matrix is converted into a single long binary string.
+For local development:
 
-3.  **Conversion of the Binary String into Bytes**: The binary string is converted into bytes for compression.
+```bash
+pip install -e .
+```
 
-4.  **Base64 Encoding**: The bytes are encoded in Base64 for a more compact and transmittable representation.
+For development with tests:
 
-5.  **Generation of the Final Notation**: The BMN notation is constructed by combining the maze dimensions with the Base64-encoded string.
+```bash
+pip install -e ".[dev]"
+```
 
-## Advantages of BMN
+## Usage
 
-1.  **Efficient Compression**: Significantly reduces the space required to store maze representations.
+```python
+from bmn import (
+    decode_bmn,
+    decode_bmn_with_metadata,
+    encode_bmn,
+    read_maze,
+    render_maze_svg,
+)
 
-2.  **Ease of Transmission**: The compact notation facilitates the transmission of maze structures over networks or between different parts of a system.
+matrix = read_maze("mazefile/mazeBin1.mz")
 
-3.  **Performance Enhancement**: The compact representation allows for faster processing in pathfinding algorithms and maze analysis.
+bmn = encode_bmn(
+    matrix,
+    metadata={
+        "entrance": (3, 0),
+        "exit": (3, 11),
+        "start": (3, 0),
+        "goal": (3, 11),
+    },
+)
 
-4.  **Versatility**: Can be easily integrated into various types of applications, from games to simulation systems and AI.
+decoded = decode_bmn(bmn)
+decoded_with_metadata, metadata = decode_bmn_with_metadata(bmn)
+svg = render_maze_svg(decoded, "maze.svg")
+```
 
-## Conclusion  
+## API
 
-Botti-Maze Notation (BMN) offers an efficient solution for representing mazes compactly, making them easier to manipulate in various computational contexts. Its application in procedural maze creation and the study of pathfinding algorithms demonstrates its versatility and practical utility.
+- `read_maze(path)`: reads a text file containing a binary maze matrix.
+- `validate_maze(matrix)`: validates that a matrix is non-empty, rectangular, and contains only `0` and `1`.
+- `encode_bmn(matrix, metadata=None)`: encodes a validated binary maze as BMN.
+- `decode_bmn(bmn)`: decodes BMN back into a matrix, ignoring optional metadata for backward compatibility.
+- `decode_bmn_with_metadata(bmn)`: decodes BMN and returns `(matrix, metadata)`.
+- `render_maze_svg(matrix, path=None, ...)`: renders the matrix as an SVG image and optionally writes it to disk.
 
-## Running the Encode/Decode Demo
+## Validation
 
-To encode and decode the sample maze, run:
+The encoder rejects:
+
+- empty matrices;
+- rows with different widths;
+- empty rows;
+- values other than `0` or `1`.
+
+The decoder raises explanatory `ValueError` exceptions for:
+
+- missing `:` separators;
+- invalid dimensions;
+- missing payloads;
+- invalid Base64 payloads;
+- payloads that are too short for the declared dimensions;
+- malformed metadata segments.
+
+## Running The Demo
 
 ```bash
 python examples/encode_decode_demo.py
 ```
 
-This script loads `mazefile/mazeBin1.mz`, prints its BMN representation, and reconstructs the original matrix.
+The demo loads `mazefile/mazeBin1.mz`, prints the BMN string, decodes it, prints metadata, reconstructs the matrix, and renders an SVG.
+
+## Running Tests
+
+```bash
+pytest -q
+```
+
+## Why BMN?
+
+BMN is inspired by compact board-state notations such as chess FEN. Its goal is to make maze structures easy to store, transmit, compare, and reconstruct in games, simulations, pathfinding experiments, and AI studies.
